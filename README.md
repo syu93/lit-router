@@ -1,4 +1,6 @@
 # lit-router
+
+
 **LitRouter** is a simple client side router, component loader (see [PRPL](https://developers.google.com/web/fundamentals/performance/prpl-pattern/)) based on [page.js](https://github.com/visionmedia/page.js). It's designed to work well with [**Web Components**](https://developer.mozilla.org/en-US/docs/Web/Web_Components) and [**LitElement**](https://lit-element.polymer-project.org).
 
 Inspired by **vue-router**.
@@ -244,4 +246,8 @@ class MyApp extends LitElement {
 **page-changed**
 
 *The page-changed event is fired when navigating to different page*
+
+### Transition
+
+**LitPage** provide a simple way to handle transition between pages. Add the data attribute 
 
