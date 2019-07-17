@@ -47,14 +47,15 @@ export class LitRouter {
    * @param {Object} route ROute definition object
    * @param {Array} nodes LitPage slotted view element to be displayed
    */
-  getCurrentPage(route, nodes = [], attrForSelected = 'name') {
+  getCurrentPage({ nodes = [], attrForSelected = 'name', router = document.$router} = {}) {
+    const route = router;
     // Itterate through slot nodes to add the activate attribute
     nodes.map(node => {
       node.getAttribute(attrForSelected) == route.name ? node.setAttribute('active', true) : false;
     });
     if (route.component) route.component();
     if (route.parent)
-      return this.getCurrentPage(route.parent, nodes);
+      return this.getCurrentPage({ nodes, attrForSelected, router: route.parent });
     return route.name;
   }
 
@@ -74,7 +75,7 @@ export class LitRouter {
       const argumentArray = [path, this._beforeEach.bind(null, route), ...middlewares, (ctx, next) => {
         if (parent) {
           ctx.parent = route;
-          this.getCurrentPage(parent);
+          this.getCurrentPage({ router: parent });
         }
         ctx.name = name;
         ctx.component = component;
