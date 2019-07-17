@@ -39,7 +39,11 @@ class LitPage extends LitElement {
   _renderView(content) {
     for (let el of content) el.removeAttribute('active');
 
-    document.$router.getCurrentPage(document.$router, content, this.attrForSelected);
+    document.$router.getCurrentPage({
+      nodes: content,
+      attrForSelected: this.attrForSelected,
+      router: document.$router
+    });
     let selectedPage = null;
 
     for (let el of content) {

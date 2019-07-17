@@ -60,15 +60,26 @@ class LitRouter {
    */
 
 
-  getCurrentPage(route) {
-    let nodes = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
-    let attrForSelected = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'name';
-    // Itterate through slot nodes to add the activate attribute
+  getCurrentPage() {
+    let _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+        _ref$nodes = _ref.nodes,
+        nodes = _ref$nodes === void 0 ? [] : _ref$nodes,
+        _ref$attrForSelected = _ref.attrForSelected,
+        attrForSelected = _ref$attrForSelected === void 0 ? 'name' : _ref$attrForSelected,
+        _ref$router = _ref.router,
+        router = _ref$router === void 0 ? document.$router : _ref$router;
+
+    const route = router; // Itterate through slot nodes to add the activate attribute
+
     nodes.map(node => {
       node.getAttribute(attrForSelected) == route.name ? node.setAttribute('active', true) : false;
     });
     if (route.component) route.component();
-    if (route.parent) return this.getCurrentPage(route.parent, nodes);
+    if (route.parent) return this.getCurrentPage({
+      nodes,
+      attrForSelected,
+      router: route.parent
+    });
     return route.name;
   }
   /**
@@ -96,7 +107,9 @@ class LitRouter {
       const argumentArray = [path, this._beforeEach.bind(null, route), ...middlewares, (ctx, next) => {
         if (parent) {
           ctx.parent = route;
-          this.getCurrentPage(parent);
+          this.getCurrentPage({
+            router: parent
+          });
         }
 
         ctx.name = name;
@@ -163,7 +176,11 @@ class LitPage extends LitElement {
   _renderView(content) {
     for (let el of content) el.removeAttribute('active');
 
-    document.$router.getCurrentPage(document.$router, content, this.attrForSelected);
+    document.$router.getCurrentPage({
+      nodes: content,
+      attrForSelected: this.attrForSelected,
+      router: document.$router
+    });
     let selectedPage = null;
 
     for (let el of content) {
