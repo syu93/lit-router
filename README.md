@@ -47,7 +47,7 @@ You can also define `sub routes` and add route `middlewares`.
 
 
 
-### Define routes
+### Define routes
 
 ```javascript
 import { LitRouter } from "lit-router/pkg/dist-src/lit-router/lit-router.js";
@@ -97,7 +97,7 @@ router.start();
 
 
 
-### Define route guard
+### Define route guard
 
 You can define route guard with the **beforeEach** method like this :
 
@@ -165,9 +165,9 @@ class MyApp extends LitElement {
 
 
 
-## API
+## API
 
-### LitRouter
+### LitRouter
 
 Import **LitRouter** from the lit-route ES module.
 
