@@ -130,7 +130,7 @@ class MyApp extends LitElement {
     // Add an event listener on the `page-changed` event
     document.addEventListener('page-changed', () => {
       const router = document.$router;
-      this.page = route.getCurrentPage(router);
+      this.page = router.getCurrentPage();
     });
   }
 
