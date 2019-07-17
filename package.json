@@ -2,6 +2,12 @@
   "name": "@syu93/lit-router",
   "version": "0.2.0",
   "description": "LitRouter** is a simple client side router, component loader (see [PRPL](https://developers.google.com/web/fundamentals/performance/prpl-pattern/)) based on [page.js](https://github.com/visionmedia/page.js). It's designed to work well with [**Web Components**](https://developer.mozilla.org/en-US/docs/Web/Web_Components) and [**LitElement**](https://lit-element.polymer-project.org).",
+  "keywords": [
+    "webcomponents",
+    "lit-element",
+    "router",
+    "prpl-pattern"
+  ],
   "main": "pkg/dist-src/index.js",
   "dependencies": {
     "page": "^1.11.4"
@@ -29,7 +35,7 @@
     "type": "git",
     "url": "git+https://github.com/syu93/lit-router.git"
   },
-  "author": "",
+  "author": "syu93",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/syu93/lit-router/issues"
