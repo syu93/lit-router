@@ -130,7 +130,7 @@ class MyApp extends LitElement {
     // Add an event listener on the `page-changed` event
     document.addEventListener('page-changed', () => {
       const router = document.$router;
-      this.page = route.getCurrentPage(router);
+      this.page = router.getCurrentPage();
     });
   }
 
@@ -249,5 +249,9 @@ class MyApp extends LitElement {
 
 ### Transition
 
-**LitPage** provide a simple way to handle transition between pages. Add the data attribute 
+**LitPage** provide a simple way to handle transition between pages with the data attribute `data-animation`.
 
+There is two values for this attribute : 
+
+* page-enter (***default***)
+* page-leave
