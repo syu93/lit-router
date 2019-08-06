@@ -61,15 +61,12 @@ class LitRouter {
 
 
   getCurrentPage() {
-    let _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
-        _ref$nodes = _ref.nodes,
-        nodes = _ref$nodes === void 0 ? [] : _ref$nodes,
-        _ref$attrForSelected = _ref.attrForSelected,
-        attrForSelected = _ref$attrForSelected === void 0 ? 'name' : _ref$attrForSelected,
-        _ref$router = _ref.router,
-        router = _ref$router === void 0 ? document.$router : _ref$router;
-
-    const route = router; // Itterate through slot nodes to add the activate attribute
+    var {
+      nodes = [],
+      attrForSelected = 'name',
+      router = document.$router
+    } = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+    var route = router; // Itterate through slot nodes to add the activate attribute
 
     nodes.map(node => {
       node.getAttribute(attrForSelected) == route.name ? node.setAttribute('active', true) : false;
@@ -91,10 +88,12 @@ class LitRouter {
 
   _createRoute(routes, parent) {
     routes.map(route => {
-      let name = route.name,
-          path = route.path,
-          component = route.component,
-          middlewares = route.middlewares;
+      var {
+        name,
+        path,
+        component,
+        middlewares
+      } = route;
 
       if (parent) {
         route.parent = parent;
@@ -104,7 +103,7 @@ class LitRouter {
       middlewares = middlewares || []; // If no component given
 
       component = component || false;
-      const argumentArray = [path, this._beforeEach.bind(null, route), ...middlewares, (ctx, next) => {
+      var argumentArray = [path, this._beforeEach.bind(null, route), ...middlewares, (ctx, next) => {
         if (parent) {
           ctx.parent = route;
           this.getCurrentPage({
@@ -115,7 +114,7 @@ class LitRouter {
         ctx.name = name;
         ctx.component = component;
         route.ctx = ctx;
-        const event = new CustomEvent("page-changed", {
+        var event = new CustomEvent("page-changed", {
           detail: {
             context: ctx
           }
@@ -136,6 +135,37 @@ class LitRouter {
 
 }
 
+function _taggedTemplateLiteral(strings, raw) {
+  if (!raw) {
+    raw = strings.slice(0);
+  }
+
+  return Object.freeze(Object.defineProperties(strings, {
+    raw: {
+      value: Object.freeze(raw)
+    }
+  }));
+}
+
+function _templateObject2() {
+  var data = _taggedTemplateLiteral(["<main class=\"lit-page\"><slot></slot></main>"]);
+
+  _templateObject2 = function _templateObject2() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject() {
+  var data = _taggedTemplateLiteral(["\n      :host {\n        display: block;\n        position: relative;\n      }\n      :host ::slotted(:not(slot):not([active])) { display: none !important; }\n      ::slotted(*) { display: block; }\n    "]);
+
+  _templateObject = function _templateObject() {
+    return data;
+  };
+
+  return data;
+}
 /**
  * LitPage is a simple page view renderer, based on the current LitRouter selected route.
  */
@@ -158,8 +188,8 @@ class LitPage extends LitElement {
 
 
   firstUpdated() {
-    const slot = this.shadowRoot.querySelector('main slot');
-    const content = slot.assignedNodes().filter(node => !node.nodeValue);
+    var slot = this.shadowRoot.querySelector('main slot');
+    var content = slot.assignedNodes().filter(node => !node.nodeValue);
 
     this._renderView(content);
 
@@ -174,20 +204,23 @@ class LitPage extends LitElement {
 
 
   _renderView(content) {
-    for (let el of content) el.removeAttribute('active');
+    for (var el of content) {
+      el.removeAttribute('active');
+    }
 
     document.$router.getCurrentPage({
       nodes: content,
       attrForSelected: this.attrForSelected,
       router: document.$router
     });
-    let selectedPage = null;
+    var selectedPage = null;
 
-    for (let el of content) {
-      if (el.hasAttribute('active')) {
-        selectedPage = el;
+    for (var _el of content) {
+      if (_el.hasAttribute('active')) {
+        selectedPage = _el;
       }
-      el.classList.remove('animated');
+
+      _el.classList.remove('animated');
     }
 
     if (!selectedPage) return;
@@ -199,18 +232,11 @@ class LitPage extends LitElement {
   }
 
   static get styles() {
-    return css`
-      :host {
-        display: block;
-        position: relative;
-      }
-      :host ::slotted(:not(slot):not([active])) { display: none !important; }
-      ::slotted(*) { display: block; }
-    `;
+    return css(_templateObject());
   }
 
   render() {
-    return html`<main class="lit-page"><slot></slot></main>`;
+    return html(_templateObject2());
   }
 
 }
