@@ -249,5 +249,9 @@ class MyApp extends LitElement {
 
 ### Transition
 
-**LitPage** provide a simple way to handle transition between pages. Add the data attribute 
+**LitPage** provide a simple way to handle transition between pages with the data attribute `data-animation`.
 
+There is two values for this attribute : 
+
+* page-enter (***default***)
+* page-leave
