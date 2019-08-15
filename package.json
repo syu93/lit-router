@@ -1,6 +1,6 @@
 {
   "name": "@syu93/lit-router",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "LitRouter is a simple client side router, component loader (PRPL) based on page.js. It's designed to work well with Web Components and LitElement.",
   "keywords": [
     "webcomponents",
@@ -11,6 +11,7 @@
   "main": "pkg/dist-src/index.js",
   "module": "pkg/dist-src/index.js",
   "dependencies": {
+    "lit-element": "^2.2.1",
     "page": "^1.11.4"
   },
   "devDependencies": {
