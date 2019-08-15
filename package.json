@@ -11,6 +11,7 @@
   "main": "pkg/dist-src/index.js",
   "module": "pkg/dist-src/index.js",
   "dependencies": {
+    "lit-element": "^2.2.1",
     "page": "^1.11.4"
   },
   "devDependencies": {
