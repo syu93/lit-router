@@ -1,25 +1,40 @@
-import { LitElement, html, css } from "lit-element";
-
 /**
  * LitPage is a simple page view renderer, based on the current LitRouter selected route.
  */
-class LitPage extends LitElement {
+class LitPage extends HTMLElement {
   constructor() {
     super();
+
+    let shadowRoot = this.attachShadow({mode: 'open'});
+    const template = document.createElement('template');
+    template.innerHTML = `<style>
+  :host { display: block; position: relative; }
+  :host ::slotted(:not(slot):not([active])) { display: none !important; }
+  ::slotted(*) { display: block; }
+</style>
+<main class="lit-page"><slot></slot></main>`;
+    shadowRoot.appendChild(template.content.cloneNode(true));
+
+    // Initialize properties values
     this.attrForSelected = 'name';
   }
-  
-  static get properties() {
-    return {
-      attrForSelected: String
-    };
+
+  /**
+   * Observe both camelcase and kebab case attribute
+   */
+  static get observedAttributes() {
+    return ['attr-for-selected', 'attrForSelected'];
+  }
+
+  attributeChangedCallback(name, oldValue, newValue) {
+    this.attrForSelected = newValue;
   }
 
   /**
    * Itterate over node inside slot element on LitPage component first updated
    * To determine which page is currently activated
    */
-  firstUpdated() {
+  connectedCallback() {
     const slot = this.shadowRoot.querySelector('main slot');
     const content = slot.assignedNodes().filter(node => !node.nodeValue);
     this._renderView(content);
@@ -48,19 +63,6 @@ class LitPage extends LitElement {
       selectedPage.classList.add(selectedPage.dataset.animation || "page-enter");
     }
   }
-
-  static get styles() {
-    return css`
-      :host {
-        display: block;
-        position: relative;
-      }
-      :host ::slotted(:not(slot):not([active])) { display: none !important; }
-      ::slotted(*) { display: block; }
-    `;
-  }
-  
-  render() { return html`<main class="lit-page"><slot></slot></main>`; }
 }
 
 window.customElements.define('lit-page', LitPage);

@@ -7,7 +7,7 @@ Inspired by **vue-router**.
 
 ## Import
 
-The **lit-router** package comes with sub packages `lit-page` and `lit-view` which are lightweight web-components that handle display of the selected route and view rendering based on the `active` attribute.
+The **lit-router** package comes with sub package `lit-page` which is a lightweight web-component that handle display of the selected route and view rendering based on the `active` attribute.
 
 ### Full import
 
@@ -30,12 +30,6 @@ import { LitRouter } from "lit-router/pkg/dist-src/lit-router/lit-router.js";
 ```javascript
 import "lit-router/pkg/dist-src/lit-page/lit-page.js";
 ```
-
-```javascript
-import "lit-router/pkg/dist-src/lit-view/lit-view.js";
-```
-
-
 
 ## Usage
 
